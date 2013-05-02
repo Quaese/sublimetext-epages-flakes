@@ -14,7 +14,7 @@ Flakes
 
 Installation
 ------------
-TODO !!!!!!
+Follow [this readme](https://github.com/ePages-rnd/sublimetext-plugins).
 
 To use the ctags functionality:
 
@@ -89,10 +89,11 @@ Runs epages commands on virtual machine (or locally on windows, if applicable)
 * import_hook
 * delete_xml
 * delete_hook
-* ... see JanJanJan.sublime-settings
+* ... see flakes.sublime-settings
 
 ### Useful helpers
 * open file on vm
 * open error/debug/... log
+* Perl snippets for debug and stacktrace logging
 
 

@@ -3,7 +3,7 @@
         "id": "tools",
         "children": [
             {
-                "caption": "JanJanJan",
+                "caption": "Flakes",
                 "children": [
                     {
                         "caption": "Open file from clipboard",
@@ -162,26 +162,26 @@
                 "id": "package-settings",
                 "children": [
                     {
-                        "caption": "JanJanJan",
+                        "caption": "Flakes",
                         "children": [
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/JanJanJan/JanJanJan.sublime-settings"
+                                    "file": "${packages}/Flakes/flakes.sublime-settings"
                                 },
                                 "caption": "Settings – Default"
                             },
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/JanJanJan/JanJanJan (Windows).sublime-settings"
+                                    "file": "${packages}/Flakes/flakes (Windows).sublime-settings"
                                 },
                                 "caption": "Settings – Default (Windows)"
                             },
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/User/JanJanJan.sublime-settings"
+                                    "file": "${packages}/User/flakes.sublime-settings"
                                 },
                                 "caption": "Settings – User"
                             },
@@ -191,7 +191,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/JanJanJan/Default.sublime-keymap"
+                                    "file": "${packages}/Flakes/Default.sublime-keymap"
                                 },
                                 "caption": "Key Bindings – Default"
                             },
