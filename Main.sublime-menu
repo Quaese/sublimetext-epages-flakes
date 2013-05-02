@@ -167,21 +167,21 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/Flakes/flakes.sublime-settings"
+                                    "file": "${packages}/Flakes/Flakes.sublime-settings"
                                 },
                                 "caption": "Settings – Default"
                             },
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/Flakes/flakes (Windows).sublime-settings"
+                                    "file": "${packages}/Flakes/Flakes (Windows).sublime-settings"
                                 },
                                 "caption": "Settings – Default (Windows)"
                             },
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/User/flakes.sublime-settings"
+                                    "file": "${packages}/User/Flakes.sublime-settings"
                                 },
                                 "caption": "Settings – User"
                             },
