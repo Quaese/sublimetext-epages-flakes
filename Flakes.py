@@ -96,7 +96,7 @@ class ExecCommandOnVmCommand(sublime_plugin.WindowCommand):
             if sublime.platform() == "windows":
                 if vm == "C":
                     windowsCommands = sublime.load_settings(flakes_settings).get("windows_commands", {})
-                    if windowsFileCommands.get(command):
+                    if windowsCommands.get(command):
                         self.window.run_command("exec",{
                             "cmd" : windowsCommands[command]["cmd"]
                         })
@@ -278,7 +278,3 @@ class BuildJsOnVmCommand(sublime_plugin.WindowCommand):
                     "path" : sshSettings["path"]
                 })
             self.window.run_command("exec", execDict)
-
-
-
-
