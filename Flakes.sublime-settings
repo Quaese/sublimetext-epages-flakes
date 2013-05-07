@@ -50,10 +50,10 @@
       "cmd" : "C:\\epages\\Perl\\bin\\perl.exe C:\\epages\\Cartridges\\DE_EPAGES\\Object\\Scripts\\set.pl -storename Store -path \"/\" JSDebugLevel=2"
     },
     "restart_perl" : {
-      "cmd" : ["net stop epages && net start epages"] // Not sure if this works, otherwise just use execute .bat here
+      "cmd" : "executes restart.bat in $Packages\\Flakes"
     },
     "restart_app" : {
-      "cmd" : ["net stop epages && net start epages"]
+      "cmd" : "executes restart.bat in $Packages\\Flakes"
     }
   },
   "windows_file_commands" : {

@@ -97,9 +97,14 @@ class ExecCommandOnVmCommand(sublime_plugin.WindowCommand):
                 if vm == "C":
                     windowsCommands = sublime.load_settings(flakes_settings).get("windows_commands", {})
                     if windowsCommands.get(command):
-                        self.window.run_command("exec",{
-                            "cmd" : windowsCommands[command]["cmd"]
-                        })
+                        if command == "restart_perl" or command == "restart_app":
+                            self.window.run_command("exec",{
+                                "cmd" : sublime.packages_path() + "\\Flakes\\" + "restart.bat"
+                            })
+                        else:
+                            self.window.run_command("exec",{
+                                "cmd" : windowsCommands[command]["cmd"]
+                            })
                 else:
                     vmName = sublime.load_settings(flakes_settings).get("drive_letter_to_vm_name", {}).get(vm, vm)
                     pathToPutty = sublime.load_settings(flakes_settings).get("path_to_putty", "")
