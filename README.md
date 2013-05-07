@@ -13,6 +13,7 @@ Flakes
   - [Unix](#unix)
 - [Usage](#usage)
 - [Features](#features)
+- [Development](#development-todo)
 
 
 Installation
@@ -123,5 +124,11 @@ Runs epages commands on virtual machine (or locally on windows, if applicable)
 * open file on vm
 * open error/debug/... log
 * Perl snippets for debug and stacktrace logging
+
+Development (TODO)
+------------
+* Add *Snippets* for javascript. (E.g. `define` module, `testcase` module,...)
+* Copy to shared function?
+* Open terminal with *ssh session on vm* in current file context.
 
 
