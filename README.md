@@ -1,6 +1,8 @@
 Flakes
 =================
 
+*A tasty treat for your epages6 development workflow.*
+
 [Sublime Text 2](http://www.sublimetext.com/2) plugin that helps... a lot!...
 
 ---
@@ -9,6 +11,7 @@ Flakes
 - [Configuration](#configuration)
   - [Windows](#windows)
   - [Unix](#unix)
+- [Usage](#usage)
 - [Features](#features)
 
 
@@ -31,44 +34,68 @@ Edit User Settings:
 * Click the **Preferences > Package Settings > Flakes > User - Settings User** menu entry.
 * Edit the following **json** object and save it into your User Settings file.
 ### Windows
-``` js
+```js
 {
-    "C": "C:/epages/", // "driveletter" : "Path to eproot on that drive"
-    "X": "X:/", // You can add more virtual machines mounted on more drives here.
-    "vms": [
-        [
-            "C", "Lokal" // "driveletter" : "Description of the machine mounted on the driveletter"
-        ],
-
-        [
-            "X", "VM1" // You can add more virtual machines mounted on more drives here.
-        ]
-    ],
-    "drive_letter_to_vm_name" : {
-    	"X" : "myname-vm-lin-1" // "driveletter" : "name of the virtual machine on the nextwork"
-    },
-    "path_to_putty" : "C:\\Users\\username\\Downloads\\putty" // Place the path to your putty folder here.
+      //
+      // for local installation, windows-vms and linux-vms:
+      //    
+      "C": "C:\\epages\\",                            // "driveletter" : "Path to eproot on that drive"
+      "AHEUMANN-VM1" : "\\\\AHEUMANN-VM1\\epages\\",  // windows-vm mounted as a network drive
+      "X" : "X:\\",                                   // linux-vm mounted on X: drive via WinSCP
+      "vms": [
+        // ["Machine-name as above", "Some description"]
+        ["C", "Lokale Installation"],
+        ["AHEUMANN-VM1", "VM1"],
+        ["X", "VM2"]
+      ],
+      
+      //
+      // only for linux-vms:
+      //      
+      "drive_letter_to_vm_name" : {
+        "X" : "aheumann-vm2"  // "driveletter" : "name of the virtual machine on the nextwork"
+      },
+      "path_to_putty" : "C:\\Users\\username\\Programs\\putty"
 }
 ```
 ### Unix
-``` js
+```js
 {
-  "jr-vm-lin-1" : "/Volumes/jr-vm-lin-1/srv/epages/eproot/",
-  // "hostname of virtual machine" : "path to eproot on virtual machine on your file system"
-  "jr-vm-lin-2" : "/Volumes/jr-vm-lin-2/srv/epages/eproot/",
-  "jr-vm-lin-3" : "/Volumes/jr-vm-lin-3/srv/epages/eproot/",
-  "vms" : [
-    ["jr-vm-lin-1", "VM1"],
-  // ["hostname of virtual machine", "Some description"]
-    ["jr-vm-lin-2", "VM2"],
-    ["jr-vm-lin-3", "VM3"]
-  ],
-  "filepath_to_vm" : "\\/Volumes\\/(.*)\\/srv\\/epages\\/.*$",
-  // regex matching a filepath to the hostname of a virtual machine
-  "filepath_to_eproot" : "\\/Volumes\\/.*\\/srv\\/epages\\/eproot/(.*)$", // used for ExecFileCommandOnVmCommand
-  // regex matching a filepath to a relative filepath, i.e. relative to eproot.
+      // "hostname of virtual machine" : "path to eproot on virtual machine on your file system"
+      "jr-vm-lin-1" : "/Volumes/jr-vm-lin-1/srv/epages/eproot/",
+      "jr-vm-lin-2" : "/Volumes/jr-vm-lin-2/srv/epages/eproot/",
+      "jr-vm-lin-3" : "/Volumes/jr-vm-lin-3/srv/epages/eproot/",
+      "vms" : [
+        // ["hostname of virtual machine", "Some description"]
+        ["jr-vm-lin-1", "VM1"],
+        ["jr-vm-lin-2", "VM2"],
+        ["jr-vm-lin-3", "VM3"]
+      ],
+      "filepath_to_vm" : "\\/Volumes\\/(.*)\\/srv\\/epages\\/.*$",
+      // regex matching a filepath to the hostname of a virtual machine
+      "filepath_to_eproot" : "\\/Volumes\\/.*\\/srv\\/epages\\/eproot/(.*)$",
+      // regex matching a filepath to a relative filepath, i.e. relative to eproot.
+      // used for exec_file_command_on_vm command.
 }
 ```
+
+Usage
+--------
+### Via Command Pallette
+Bring up the Command Palette (`Command+Shift+P` on OS X, `Control+Shift+P` on Linux/Windows).
+* Type `Epages` to select `Epages: Open error.log`, `Epages: Open file on vm from clipboard`,...
+* or type `Choose VM` to select `Choose VM: Open error.log`, `ChooseVM: Open file on vm from clipboard`,...
+
+What's the difference between `Epages: ...` and `Choose VM: ...`?
+
+* `Epages: ...` commands try to infer the machine on which to run the command from the current file. E.g., when you are editing 
+  `C:/epages/Cartridges/DE_EPAGES/SomeTemplate.html`, and run `Epages: Open error.log`, this is going to open the `error.log` on your local installation.
+* `Choose VM: ...` commands will bring up a selection dialog with the machines defined in the `vms` key of your User - Settings (see above), and then run the command on the selected machine.
+
+### Via Tools Menu
+Some of the `Choose VM` commands are also available through the **Tools** menu.
+ * **Tools > Flakes**
+ * Click `Set debug 2`, `Open file from clipboard`,...
 
 Features
 --------
@@ -89,9 +116,10 @@ Runs epages commands on virtual machine (or locally on windows, if applicable)
 * import_hook
 * delete_xml
 * delete_hook
-* ... see flakes.sublime-settings
+* ... see [Flakes.sublime-settings](https://github.com/ePages-rnd/sublimetext-epages-flakes/blob/master/Flakes.sublime-settings)
 
 ### Useful helpers
+* open file from clipboard
 * open file on vm
 * open error/debug/... log
 * Perl snippets for debug and stacktrace logging
