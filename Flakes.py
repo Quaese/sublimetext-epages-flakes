@@ -218,16 +218,12 @@ class OpenLogOnVmCommand(sublime_plugin.WindowCommand):
         if path:
             self.window.open_file(path)
 
-class OpenThisFileOnVmCommand(sublime_plugin.WindowCommand):
-    def run(self):
-        self.window.show_quick_panel(sublime.load_settings(flakes_settings).get("vms", []), self.on_done, sublime.MONOSPACE_FONT)
-
-    def on_done(self, index):
-        if index > -1:
-            self.window.run_command("open_file_on_vm", {
-                "template_string" : self.window.active_view().file_name(),
-                "vm" : sublime.load_settings(flakes_settings).get("vms")[index][0]
-            })
+class OpenCurrentFileOnVmCommand(sublime_plugin.WindowCommand):
+    def run(self, vm, args={}):
+        self.window.run_command("open_file_on_vm", {
+            "template_string" : self.window.active_view().file_name(),
+            "vm" : vm
+        })
 
 
 class BuildCssOnVmCommand(sublime_plugin.WindowCommand):

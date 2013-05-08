@@ -197,7 +197,11 @@
     },
     {
         "caption": "Choose VM: Open current file",
-        "command": "open_this_file_on_vm"
+        "command": "choose_vm",
+        "args": {
+            "command": "open_current_file",
+            "runcommand" : true
+        }
     },
     {
         "caption": "Choose VM: Open error.log",
