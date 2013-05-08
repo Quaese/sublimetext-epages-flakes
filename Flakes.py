@@ -46,7 +46,9 @@ class ExecFileCommandOnVmCommand(sublime_plugin.WindowCommand):
                 windowsFileCommands = sublime.load_settings(flakes_settings).get("windows_file_commands", {})
                 if windowsFileCommands.get(command):
                     self.window.run_command("exec",{
-                        "cmd" : windowsFileCommands[command].get("cmd", "") + " " + self.window.active_view().file_name()
+                        "cmd" : windowsFileCommands[command].get("cmd", "") + " " + self.window.active_view().file_name(),
+                        "file_regex" : windowsFileCommands[command].get("file_regex", ""),
+                        "line_regex" : windowsFileCommands[command].get("line_regex", "")
                     })
         else:
             filepath_to_vm = sublime.load_settings(flakes_settings).get("filepath_to_vm")
@@ -97,14 +99,20 @@ class ExecCommandOnVmCommand(sublime_plugin.WindowCommand):
                 if vm == "C":
                     windowsCommands = sublime.load_settings(flakes_settings).get("windows_commands", {})
                     if windowsCommands.get(command):
-                        if command == "restart_perl" or command == "restart_app":
+                        windowsCommand = windowsCommands.get(command)
+                        if windowsCommand.get("bat"):
                             self.window.run_command("exec",{
-                                "cmd" : sublime.packages_path() + "\\Flakes\\" + "restart.bat"
+                                "cmd" : sublime.packages_path() + "\\Flakes\\" + windowsCommand.get("bat") + ".bat",
+                                "file_regex" : windowsCommand.get("file_regex", ""),
+                                "line_regex" : windowsCommand.get("line_regex", "")
                             })
                         else:
-                            self.window.run_command("exec",{
-                                "cmd" : windowsCommands[command]["cmd"]
-                            })
+                            if windowsCommand.get("cmd"):
+                                self.window.run_command("exec",{
+                                    "cmd" : windowsCommand.get("cmd"),
+                                    "file_regex" : windowsCommand.get("file_regex", ""),
+                                    "line_regex" : windowsCommand.get("line_regex", "")
+                                })
                 else:
                     vmName = sublime.load_settings(flakes_settings).get("drive_letter_to_vm_name", {}).get(vm, vm)
                     pathToPutty = sublime.load_settings(flakes_settings).get("path_to_putty", "")

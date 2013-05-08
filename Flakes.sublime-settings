@@ -7,7 +7,6 @@
     ["jr-vm-lin-2", "/Volumes/jr-vm-lin-2/"],
     ["jr-vm-lin-3", "/Volumes/jr-vm-lin-3/"]
   ],
-  "vm_to_eproot" : "srv/epages/eproot/",
   "filepath_to_vm" : "\\/Volumes\\/(.*)\\/srv\\/epages\\/.*$",
   "filepath_to_eproot" : "\\/Volumes\\/.*\\/srv\\/epages\\/eproot/(.*)$", // used for ExecFileCommandOnVmCommand
   "commands" : {
@@ -50,10 +49,10 @@
       "cmd" : "C:\\epages\\Perl\\bin\\perl.exe C:\\epages\\Cartridges\\DE_EPAGES\\Object\\Scripts\\set.pl -storename Store -path \"/\" JSDebugLevel=2"
     },
     "restart_perl" : {
-      "cmd" : "executes restart.bat in $Packages\\Flakes"
+      "bat" : "restart"
     },
     "restart_app" : {
-      "cmd" : "executes restart.bat in $Packages\\Flakes"
+      "bat" : "restart"
     }
   },
   "windows_file_commands" : {
