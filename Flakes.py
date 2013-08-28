@@ -1,7 +1,16 @@
 import sublime, sublime_plugin
 import re
+import subprocess
+import os
 
 flakes_settings = "Flakes.sublime-settings"
+
+class FlakesEventListener(sublime_plugin.EventListener):
+    def on_post_save(self, view):
+        if sublime.load_settings(flakes_settings).get("copy_to_shared"):
+            filename = view.file_name()
+            if re.compile(r".*Cartridges.*Data/Public(.*)$").match(filename) or re.compile(r".*Cartridges/(.*)/Data/javascript(.*)$").match(filename):
+                view.window().run_command("run_command_with_vm", { "command": "copy_to_shared" })
 
 class RunBuildCommand(sublime_plugin.WindowCommand):
     # helper
@@ -299,3 +308,32 @@ class BuildJsOnVmCommand(sublime_plugin.WindowCommand):
                     "path" : sshSettings["path"]
                 })
             self.window.run_command("exec", execDict)
+
+class CopyToSharedOnVmCommand(sublime_plugin.WindowCommand):
+    def run(self, vm, args={}):
+
+        self.vm = vm
+        self.filename = self.window.active_view().file_name()
+
+        m = re.compile(r".*Cartridges.*Data/Public(.*)$").match(self.filename)
+        if m:
+            shared_path = self.store() + "/Store" + m.group(1)
+            print shared_path
+            subprocess.call("cp " + self.filename + " " + shared_path, shell = True)
+        m = re.compile(r".*Cartridges/(.*)/Data/javascript(.*)$").match(self.filename)
+        if m:
+            shared_path = self.store() + "/Store/javascript/epages/cartridges/" + m.group(1).lower() + m.group(2)
+            print shared_path
+            subprocess.call("cp " + self.filename + " " + shared_path, shell = True)
+
+    def store(self):
+        # /Users/emueller/VM-Mounts/emueller-vm-1/Shared/WebRoot/StoreTypes/6.15.2/Store/lib/package-bo.js
+        path_to_storetypes = sublime.load_settings(flakes_settings).get(self.vm) + "Shared/WebRoot/StoreTypes/"
+        storetypes = os.listdir(path_to_storetypes)
+        storetypes = filter(lambda x: re.search(r'^\d\..*', x), storetypes)
+        storetypes.sort()
+        return path_to_storetypes + storetypes[-1]
+
+
+
+

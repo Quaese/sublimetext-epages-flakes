@@ -97,5 +97,8 @@
     "command" : "ssh",
     "path" : "/usr/bin"
   },
-  "gotoversion" : "6.15.4"
+  "gotoversion" : "6.15.4",
+
+  // use the copy-to-shared feature (Unix-only at the moment)
+  "copy_to_shared": false
 }
