@@ -311,20 +311,22 @@ class BuildJsOnVmCommand(sublime_plugin.WindowCommand):
 
 class CopyToSharedOnVmCommand(sublime_plugin.WindowCommand):
     def run(self, vm, args={}):
-
         self.vm = vm
         self.filename = self.window.active_view().file_name()
+
+        shared_path = None;
 
         m = re.compile(r".*Cartridges.*Data/Public(.*)$").match(self.filename)
         if m:
             shared_path = self.store() + "/Store" + m.group(1)
-            print shared_path
-            subprocess.call("cp " + self.filename + " " + shared_path, shell = True)
+
         m = re.compile(r".*Cartridges/(.*)/Data/javascript(.*)$").match(self.filename)
         if m:
             shared_path = self.store() + "/Store/javascript/epages/cartridges/" + m.group(1).lower() + m.group(2)
+
+        if shared_path is not None:
             print shared_path
-            subprocess.call("cp " + self.filename + " " + shared_path, shell = True)
+            subprocess.call("cp \"" + self.filename + "\" \"" + shared_path + "\"", shell = True)
 
     def store(self):
         # /Users/emueller/VM-Mounts/emueller-vm-1/Shared/WebRoot/StoreTypes/6.15.2/Store/lib/package-bo.js
