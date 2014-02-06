@@ -6,7 +6,7 @@ import os
 flakes_settings = "Flakes.sublime-settings"
 
 class FlakesEventListener(sublime_plugin.EventListener):
-    def on_post_save(self, view):
+    def on_post_save_async(self, view):
         if sublime.load_settings(flakes_settings).get("copy_to_shared"):
             filename = view.file_name()
             if re.compile(r".*Cartridges.*Data/Public(.*)$").match(filename) or re.compile(r".*Cartridges/(.*)/Data/javascript(.*)$").match(filename):
@@ -325,14 +325,14 @@ class CopyToSharedOnVmCommand(sublime_plugin.WindowCommand):
             shared_path = self.store() + "/Store/javascript/epages/cartridges/" + m.group(1).lower() + m.group(2)
 
         if shared_path is not None:
-            print shared_path
+            print("copied to " + shared_path)
             subprocess.call("cp \"" + self.filename + "\" \"" + shared_path + "\"", shell = True)
 
     def store(self):
         # /Users/emueller/VM-Mounts/emueller-vm-1/Shared/WebRoot/StoreTypes/6.15.2/Store/lib/package-bo.js
         path_to_storetypes = sublime.load_settings(flakes_settings).get(self.vm) + "Shared/WebRoot/StoreTypes/"
         storetypes = os.listdir(path_to_storetypes)
-        storetypes = filter(lambda x: re.search(r'^\d\..*', x), storetypes)
+        storetypes = list(filter(lambda x: re.search(r'^\d\..*', x), storetypes))
         storetypes.sort()
         return path_to_storetypes + storetypes[-1]
 
