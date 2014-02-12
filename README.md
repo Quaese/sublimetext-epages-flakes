@@ -3,7 +3,7 @@ Flakes
 
 *A tasty treat for your epages6 development workflow.*
 
-[Sublime Text 2](http://www.sublimetext.com/2) plugin that helps... a lot!...
+[Sublime Text 2](http://www.sublimetext.com/2) / [3](http://www.sublimetext.com/3) plugin that helps... a lot!...
 
 ---
 
