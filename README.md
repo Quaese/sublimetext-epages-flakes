@@ -3,7 +3,7 @@ Flakes
 
 *A tasty treat for your epages6 development workflow.*
 
-[Sublime Text 2](http://www.sublimetext.com/2) plugin that helps... a lot!...
+[Sublime Text 2](http://www.sublimetext.com/2) / [3](http://www.sublimetext.com/3) plugin that helps... a lot!...
 
 ---
 
@@ -20,13 +20,20 @@ Installation
 ------------
 Follow [this readme](https://github.com/ePages-rnd/sublimetext-plugins).
 
-To use the ctags functionality:
+### How to use the ctags functionality
 
 * Install the CTags plugin via the Package Control or grab the copy at [GitHub](https://github.com/SublimeText/CTags) and perform a manual install.
 * Install the ctags command line program on your VMs. For CentOS a simple ```yum install ctags``` will do the job.
 * Initialize via executing the "refresh ctags" command.
 * **Don't use the commands provided by the CTags plugin!** Just update via the "refresh ctags" command.
 * Test the installation. Ctrl+shift+leftmouse on a function/sub/constant name will cause Sublime to move to its definition. (Hit ctrl+shift+rightmouse to go back where you're from.)
+
+### How to use the included Perl syntax file
+
+* Install the PackageResourceViewer package
+* Via Command Palette perform a `PackageResourceViewer: Open Resource > Perl > Perl.tmLanguage`
+* Copy the content of the `Perl.tmLanguage` file provided by this repo and paste it into (overwrite) the newly opened tab
+* save the file and restart Sublime
 
 Configuration
 --------------
