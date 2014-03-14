@@ -6,7 +6,25 @@ import os
 flakes_settings = "Flakes.sublime-settings"
 
 class FlakesEventListener(sublime_plugin.EventListener):
+    def setEnv(self, view):
+        if view.file_name() and sublime.platform() == "osx":
+            filepath_to_vm = sublime.load_settings(flakes_settings).get("filepath_to_vm")
+            m = re.compile(filepath_to_vm).match(view.file_name())
+            filename = view.file_name()
+            if m:
+                vm = m.group(1)
+                # print("set com.epages.st3plugin vm to " + vm)
+                retcode = subprocess.call("defaults write com.epages.st3plugin vm " + vm, shell=True)
+
+    def on_load(self, view):
+        self.setEnv(view)
+
+    def on_activated(self, view):
+        self.setEnv(view)
+
     def on_post_save_async(self, view):
+        self.setEnv(view)
+
         if sublime.load_settings(flakes_settings).get("copy_to_shared"):
             filename = view.file_name()
             if re.compile(r".*Cartridges.*Data/Public(.*)$").match(filename) or re.compile(r".*Cartridges/(.*)/Data/javascript(.*)$").match(filename):
