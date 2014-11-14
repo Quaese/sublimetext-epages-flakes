@@ -332,5 +332,13 @@
             "command": "build_js",
             "runcommand": true
         }
+    },
+    {
+        "caption": "Epages: replace href with data-js",
+        "command": "do_data_js"
+    },
+    {
+        "caption": "Reopen current file",
+        "command": "reopen_current_file"
     }
 ]

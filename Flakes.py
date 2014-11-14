@@ -354,6 +354,8 @@ class CopyToSharedOnVmCommand(sublime_plugin.WindowCommand):
         storetypes.sort()
         return path_to_storetypes + storetypes[-1]
 
-
-
+class ReopenCurrentFileCommand(sublime_plugin.WindowCommand):
+    def run(self, args={}):
+        current_view = self.window.active_view()
+        current_view.run_command('reopen', {'encoding': current_view.encoding()})
 

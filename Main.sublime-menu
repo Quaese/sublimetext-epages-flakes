@@ -6,6 +6,10 @@
                 "caption": "Flakes",
                 "children": [
                     {
+                        "caption": "Reopen file",
+                        "command": "reopen_current_file"
+                    },
+                    {
                         "caption": "Open file from clipboard",
                         "command": "choose_vm",
                         "args": {
