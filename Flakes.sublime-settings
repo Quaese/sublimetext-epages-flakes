@@ -100,5 +100,5 @@
   "gotoversion" : "6.15.4",
 
   // use the copy-to-shared feature (Unix-only at the moment)
-  "copy_to_shared": false
+  "copy_to_shared": true
 }

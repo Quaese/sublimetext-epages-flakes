@@ -338,20 +338,23 @@ class CopyToSharedOnVmCommand(sublime_plugin.WindowCommand):
         if m:
             shared_path = self.store() + "/Store" + m.group(1)
 
-        m = re.compile(r".*Cartridges/(.*)/Data/javascript(.*)$").match(self.filename)
-        if m:
-            shared_path = self.store() + "/Store/javascript/epages/cartridges/" + m.group(1).lower() + m.group(2)
+        # m = re.compile(r".*Cartridges/(.*)/Data/javascript(.*)$").match(self.filename)
+        # if m:
+        #     shared_path = self.store() + "/Store/javascript/epages/cartridges/" + m.group(1).lower() + m.group(2)
 
         if shared_path is not None:
             print("copied to " + shared_path)
             subprocess.call("cp \"" + self.filename + "\" \"" + shared_path + "\"", shell = True)
+            # subprocess.call("chmod \"640\"  \"" + shared_path + "\"", shell = True)
+            perms = "chmod a-x `" + shared_path + " -type f`"
+            subprocess.call(perms, shell=True)
 
     def store(self):
         # /Users/emueller/VM-Mounts/emueller-vm-1/Shared/WebRoot/StoreTypes/6.15.2/Store/lib/package-bo.js
         path_to_storetypes = sublime.load_settings(flakes_settings).get(self.vm) + "Shared/WebRoot/StoreTypes/"
         storetypes = os.listdir(path_to_storetypes)
         storetypes = list(filter(lambda x: re.search(r'^\d\..*', x), storetypes))
-        storetypes.sort()
+        storetypes.sort(key=lambda s: [int(u) for u in s.split('.')])
         return path_to_storetypes + storetypes[-1]
 
 class ReopenCurrentFileCommand(sublime_plugin.WindowCommand):

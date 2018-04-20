@@ -1,0 +1,15 @@
+{
+      // "hostname of virtual machine" : "path to eproot on virtual machine on your file system"
+      "mhoellein-vm1" : "/Volumes/mhoellein-vm1/srv/epages/eproot/",
+      "mhoellein-vm2" : "/Volumes/mhoellein-vm2/srv/epages/eproot/",
+      "vms" : [
+        // ["hostname of virtual machine", "Some description"]
+        ["mhoellein-vm1", "VM1"],
+        ["mhoellein-vm2", "VM2"]
+      ],
+      "filepath_to_vm" : "\\/Volumes\\/(.*)\\/srv\\/epages\\/.*$",
+      // regex matching a filepath to the hostname of a virtual machine
+      "filepath_to_eproot" : "\\/Volumes\\/.*\\/srv\\/epages\\/eproot/(.*)$",
+      // regex matching a filepath to a relative filepath, i.e. relative to eproot.
+      // used for exec_file_command_on_vm command.
+}
